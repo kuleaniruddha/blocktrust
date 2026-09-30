@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Download, ExternalLink, ShieldCheck, Wallet, Lock, BadgeCheck } from "lucide-react";
+import {
+  Download,
+  ExternalLink,
+  ShieldCheck,
+  Wallet,
+  Lock,
+  BadgeCheck,
+  Activity,
+  Users,
+  CheckCircle2,
+  Globe,
+  BadgeIndianRupee,
+  ArrowRight,
+  QrCode
+} from "lucide-react";
 import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import MetricCard from "../../components/Cards/MetricCard";
@@ -36,111 +50,155 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="grid gap-8">
-      {/* Top Welcome / Auth Banner */}
-      <div className="panel rounded-xl p-6 bg-gradient-to-r from-stone-900 to-stone-800 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-saffron font-bold text-xs uppercase tracking-wider mb-1">
-            <ShieldCheck className="h-4 w-4" />
-            Shri Ram Mandir Trust Analytics
-          </div>
-          <h1 className="text-2xl font-black text-amber-100">
-            {user ? `Welcome back, ${user.name || user.email}` : "Trust Dashboard & Donation Tracker"}
-          </h1>
-          <p className="text-xs text-stone-300 mt-1">
-            {user
-              ? "Track your individual contributions, download cryptographic receipts, and view live trust performance."
-              : "Login to access your personal donation history, download receipts, and track contributions on-chain."}
-          </p>
-        </div>
+    <div className="space-y-8">
+      {/* 1. Header Banner */}
+      <div className="relative overflow-hidden rounded-3xl bg-[#0d121c] p-6 sm:p-8 text-white shadow-xl border border-stone-800">
+        <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
 
-        {!user ? (
-          <div className="flex items-center gap-3">
-            <Link className="btn bg-saffron text-white hover:bg-clay text-sm font-bold px-4 py-2" to="/login">
-              <Lock className="h-4 w-4" />
-              Login to Track My Donations
-            </Link>
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+              <ShieldCheck className="h-4 w-4" />
+              <span>Real-Time Audit & Tracking Console</span>
+            </div>
+            <h1 className="font-cinzel text-2xl sm:text-3xl font-black text-amber-50">
+              {user ? `Namaste, ${user.name || "Devotee"}` : "Trust Dashboard & Transparent Ledger"}
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
+              {user
+                ? "Manage your individual contributions, retrieve verifiable cryptographic receipts, and monitor temple expenditures."
+                : "Real-time visibility into all public funds, temple construction allocations, and verified on-chain disbursements."}
+            </p>
           </div>
-        ) : (
-          <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 text-xs text-stone-200">
-            Donor Account: <span className="font-bold text-amber-300">{user.email}</span>
+
+          <div className="flex flex-col sm:flex-row md:flex-col gap-2.5">
+            {!user ? (
+              <Link
+                className="btn btn-primary text-xs font-bold px-5 py-2.5 shadow-md flex items-center justify-center gap-2"
+                to="/login"
+              >
+                <Lock className="h-4 w-4" />
+                Login to Track My Donations
+              </Link>
+            ) : (
+              <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/15 backdrop-blur-sm text-xs space-y-1">
+                <div className="flex items-center gap-2 text-stone-300">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+                  <span>Active Session:</span>
+                  <strong className="text-amber-200">{user.email}</strong>
+                </div>
+                <div className="text-[11px] text-amber-300/80 font-bold uppercase tracking-wider">
+                  Role: {user.role} Account
+                </div>
+              </div>
+            )}
+
+            {user?.role !== "admin" && (
+              <Link
+                to="/donate"
+                className="btn bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-2 px-4 rounded-xl border border-white/15 transition flex items-center justify-center gap-1.5"
+              >
+                <BadgeIndianRupee className="h-3.5 w-3.5 text-amber-300" />
+                Make New Contribution
+              </Link>
+            )}
           </div>
-        )}
+        </div>
       </div>
 
-      {/* User Specific Donations Section */}
+      {/* 2. User Personal Tracked Donations Section (When Logged in as Donor) */}
       {user && user.role !== "admin" && (
-        <div className="panel rounded-xl p-6 border border-amber-200 bg-amber-50/40 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-amber-200/60 pb-3">
+        <div className="panel rounded-3xl p-6 sm:p-7 border border-amber-200/90 bg-gradient-to-br from-amber-50/40 via-white to-amber-50/20 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-200/60 pb-3">
             <div>
-              <h2 className="text-xl font-black text-ink flex items-center gap-2">
-                <BadgeCheck className="h-5 w-5 text-saffron" />
-                My Tracked Donations
+              <h2 className="text-xl font-black text-stone-900 flex items-center gap-2">
+                <BadgeCheck className="h-5 w-5 text-saffron-600" />
+                My Verified Contributions ({myDonations.length})
               </h2>
-              <p className="text-xs text-stone-600">Your personal contribution history and downloadable PDF receipts.</p>
+              <p className="text-xs text-stone-600 mt-0.5">
+                Your personal contribution ledger with cryptographic PDF receipts and on-chain explorer links.
+              </p>
             </div>
-            <Link to="/donate" className="btn bg-saffron text-white hover:bg-clay text-xs px-3 py-1.5 font-bold">
+            <Link
+              to="/donate"
+              className="btn btn-primary text-xs px-3.5 py-2 font-bold shadow-xs self-start sm:self-auto"
+            >
               + Donate Again
             </Link>
           </div>
 
           {loadingMy ? (
-            <p className="text-sm text-stone-500 py-4">Loading your donations...</p>
+            <p className="text-xs text-stone-400 py-6 text-center">Loading your contributions...</p>
           ) : myDonations.length === 0 ? (
-            <div className="p-6 text-center text-sm text-stone-600 bg-white rounded-lg border border-stone-200">
-              <p>You haven't made any recorded donations yet under this account.</p>
-              <Link to="/donate" className="text-saffron font-bold underline mt-2 inline-block">
-                Make your first donation to Ram Mandir Trust
+            <div className="p-8 text-center text-xs text-stone-600 bg-white rounded-2xl border border-stone-200/90 space-y-2">
+              <p className="font-semibold text-stone-800">You haven't made any donations under this account yet.</p>
+              <p className="text-stone-400">Every donation made via MetaMask or UPI will be automatically linked here.</p>
+              <Link to="/donate" className="btn btn-primary text-xs font-bold mt-2 inline-flex">
+                Make your first donation
               </Link>
             </div>
           ) : (
-            <div className="overflow-x-auto rounded-lg border border-stone-200 bg-white">
+            <div className="overflow-x-auto rounded-2xl border border-stone-200 bg-white shadow-xs">
               <table className="w-full text-left text-sm text-stone-700">
-                <thead className="bg-stone-100 text-xs font-bold text-stone-700 uppercase tracking-wider border-b border-stone-200">
+                <thead className="bg-stone-50 text-[11px] font-black text-stone-600 uppercase tracking-wider border-b border-stone-200">
                   <tr>
                     <th className="px-4 py-3">Receipt No</th>
                     <th className="px-4 py-3">Amount</th>
                     <th className="px-4 py-3">Purpose</th>
                     <th className="px-4 py-3">Mode</th>
                     <th className="px-4 py-3">Blockchain Tx</th>
-                    <th className="px-4 py-3 text-right">Receipt PDF</th>
+                    <th className="px-4 py-3 text-right">Download PDF</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-200">
-                  {myDonations.map((d) => (
-                    <tr key={d._id || d.receiptNumber} className="hover:bg-amber-50/40 transition">
-                      <td className="px-4 py-3 font-mono text-xs font-bold text-stone-900">{d.receiptNumber || "N/A"}</td>
-                      <td className="px-4 py-3 font-bold text-emerald-700">
-                        {d.currency === "ETH" ? `${d.amount} ETH` : money(d.amount)}
-                      </td>
-                      <td className="px-4 py-3 text-xs text-stone-600 max-w-xs truncate">{d.purpose || "Shri Ram Mandir Trust"}</td>
-                      <td className="px-4 py-3 text-xs font-semibold uppercase">{d.paymentMode || "metamask"}</td>
-                      <td className="px-4 py-3 text-xs font-mono">
-                        {d.transactionHash ? (
-                          <a
-                            href={`https://sepolia.etherscan.io/tx/${d.transactionHash}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-saffron hover:underline flex items-center gap-1"
+                <tbody className="divide-y divide-stone-100">
+                  {myDonations.map((d) => {
+                    const docId = d._id || d.id;
+                    const isEth = d.currency === "ETH" || d.paymentMode === "metamask";
+
+                    return (
+                      <tr key={docId || d.receiptNumber} className="hover:bg-amber-50/40 transition">
+                        <td className="px-4 py-3 font-mono text-xs font-bold text-stone-900">
+                          {d.receiptNumber || "BT-RECEIPT"}
+                        </td>
+                        <td className="px-4 py-3 font-black text-xs text-emerald-800">
+                          {isEth ? `${d.amount} ETH` : money(d.amount)}
+                        </td>
+                        <td className="px-4 py-3 text-xs text-stone-600 max-w-xs truncate font-medium">
+                          {d.purpose || "Shri Ram Mandir Trust"}
+                        </td>
+                        <td className="px-4 py-3 text-xs">
+                          <span className="inline-flex items-center gap-1 font-bold text-[11px] bg-stone-100 px-2 py-0.5 rounded text-stone-700">
+                            {isEth ? <Wallet className="h-3 w-3 text-amber-600" /> : <QrCode className="h-3 w-3 text-emerald-600" />}
+                            {d.paymentMode || (isEth ? "metamask" : "upi")}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-xs font-mono">
+                          {d.transactionHash ? (
+                            <a
+                              href={`https://sepolia.etherscan.io/tx/${d.transactionHash}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-saffron-700 hover:text-saffron-900 hover:underline flex items-center gap-1 font-bold"
+                            >
+                              {d.transactionHash.substring(0, 10)}...
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          ) : (
+                            <span className="text-stone-400 italic">Off-Chain UPI</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <button
+                            className="btn btn-primary text-xs py-1 px-3 rounded-lg flex items-center gap-1.5 ml-auto shadow-xs"
+                            onClick={() => downloadReceipt(docId)}
                           >
-                            {d.transactionHash.substring(0, 10)}...
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
-                        ) : (
-                          <span className="text-stone-400">N/A</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        <button
-                          className="btn bg-saffron text-white hover:bg-clay text-xs py-1 px-3 rounded flex items-center gap-1.5 ml-auto shadow-sm"
-                          onClick={() => downloadReceipt(d._id)}
-                        >
-                          <Download className="h-3.5 w-3.5" />
-                          Download
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                            <Download className="h-3.5 w-3.5" />
+                            Receipt
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -148,48 +206,105 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Metrics Row */}
-      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-        <MetricCard label="Donations" value={money(m.totalDonations)} tone="text-leaf" />
-        <MetricCard label="Expenses" value={money(m.totalExpenses)} tone="text-clay" />
-        <MetricCard label="Balance" value={money(m.remainingBalance)} />
-        <MetricCard label="Donors" value={m.donors || 0} />
-        <MetricCard label="Transactions" value={m.donationCount || 0} />
-        <MetricCard label="Network" value={data?.network || "Sepolia"} />
+      {/* 3. Metrics Row with Rich Icon Cards */}
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <MetricCard
+          label="Total Donations"
+          value={money(m.totalDonations)}
+          tone="text-emerald-700 font-extrabold"
+          icon={BadgeIndianRupee}
+        />
+        <MetricCard
+          label="Total Expenses"
+          value={money(m.totalExpenses)}
+          tone="text-amber-800 font-extrabold"
+          icon={Activity}
+        />
+        <MetricCard
+          label="Vault Balance"
+          value={money(m.remainingBalance)}
+          tone="text-blue-800 font-extrabold"
+          icon={Lock}
+        />
+        <MetricCard
+          label="Total Donors"
+          value={m.donors || 0}
+          tone="text-saffron-700 font-extrabold"
+          icon={Users}
+        />
+        <MetricCard
+          label="Transactions"
+          value={m.donationCount || 0}
+          tone="text-stone-900 font-extrabold"
+          icon={CheckCircle2}
+        />
+        <MetricCard
+          label="Active Chain"
+          value={data?.network || "Sepolia"}
+          tone="text-stone-900 font-extrabold"
+          icon={Globe}
+        />
       </div>
 
-      {/* Analytics Charts */}
-      <DashboardCharts analytics={analytics} />
+      {/* 4. Analytics Visual Charts */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-black text-stone-900 flex items-center gap-2">
+            <Activity className="h-4 w-4 text-saffron-700" />
+            Financial Breakdown & Monthly Inflow
+          </h2>
+          <span className="text-xs text-stone-400">Updated in real-time</span>
+        </div>
+        <DashboardCharts analytics={analytics} />
+      </div>
 
-      {/* Funds Flow Tracking (Added vs Spent) */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Funds Added: Recent Public Transactions */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-bold text-ink flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-            Where Funds Are Getting Added (Recent Donations)
-          </h3>
+      {/* 5. Funds Flow: Funds Added vs Funds Spent */}
+      <div className="grid gap-8 lg:grid-cols-2">
+        {/* Left Column: Recent Public Donations */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Recent Inflow (Donations)
+            </h3>
+            <Link to="/transactions" className="text-xs font-bold text-saffron-700 hover:underline">
+              View All →
+            </Link>
+          </div>
           <TransactionTable rows={data?.recentTransactions || []} />
         </div>
 
-        {/* Funds Spent: Recent Verified Expenditures */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-bold text-ink flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-amber-500"></span>
-            Where Funds Are Going (Recent Expenditures)
-          </h3>
-          <div className="panel rounded-xl border border-stone-200 overflow-hidden divide-y divide-stone-200 bg-white">
+        {/* Right Column: Recent Verified Expenditures */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+              Recent Outflow (Expenditures)
+            </h3>
+            <Link to="/expenses" className="text-xs font-bold text-saffron-700 hover:underline">
+              View All Audits →
+            </Link>
+          </div>
+
+          <div className="panel rounded-2xl border border-stone-200/90 overflow-hidden divide-y divide-stone-100 bg-white shadow-card">
             {(!data?.recentExpenses || data.recentExpenses.length === 0) ? (
-              <p className="p-6 text-center text-xs text-stone-500">No verified expenditures logged yet.</p>
+              <div className="p-8 text-center text-xs text-stone-500 space-y-1">
+                <p className="font-bold text-stone-700">No verified expenditures logged yet.</p>
+                <p className="text-stone-400">Expenses logged by Admin will appear with category details here.</p>
+              </div>
             ) : (
               data.recentExpenses.map((exp) => (
-                <div key={exp._id} className="p-4 flex justify-between items-center hover:bg-stone-50/50 transition">
+                <div key={exp._id || exp.id} className="p-4 flex justify-between items-center hover:bg-amber-50/20 transition">
                   <div>
                     <h4 className="font-bold text-stone-900 text-sm">{exp.title}</h4>
-                    <p className="text-xs text-stone-500">{exp.category} · {exp.status || "Approved"}</p>
+                    <p className="text-xs text-stone-500 mt-0.5">
+                      <span className="font-semibold text-amber-800">{exp.category}</span>
+                      {exp.vendor && <span> · {exp.vendor}</span>}
+                      <span> · <span className="uppercase text-[10px] font-extrabold text-stone-400">{exp.status || "approved"}</span></span>
+                    </p>
                   </div>
                   <div className="text-right">
-                    <span className="font-black text-amber-900 text-sm">{money(exp.amount)}</span>
+                    <span className="font-black text-stone-900 text-sm">{money(exp.amount)}</span>
                   </div>
                 </div>
               ))
