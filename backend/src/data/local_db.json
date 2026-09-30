@@ -1,0 +1,150 @@
+{
+  "users": {
+    "4jr0lu4xjj8": {
+      "name": "Trust Admin",
+      "email": "admin@blocktrust.local",
+      "password": "$2a$12$pCvCQ0LYoCSEC8KINv5AduWY5fNaBOdktMtOh1B6QNOD1VUDh.egi",
+      "role": "admin",
+      "updatedAt": "2026-09-11T18:16:05.814Z",
+      "createdAt": "2026-09-11T18:16:05.814Z"
+    },
+    "gx37d94a1n8": {
+      "name": "Aniruddha Kule",
+      "email": "aniruddhakule@gmail.com",
+      "password": "$2a$12$2ZJBHxabd1aMHinrRon7GOlNoTFdXqWYlfcG1UgSOLb0F.2whc/QG",
+      "role": "admin",
+      "updatedAt": "2026-09-11T18:17:43.609Z",
+      "createdAt": "2026-09-11T18:17:43.609Z"
+    },
+    "6reogzqndra": {
+      "name": "ANIRUDDHA KULE",
+      "email": "202301034.aniruddhasml@student.xavier.ac.in",
+      "password": "$2a$12$jkL1EdKxPn22x0lHCvJ7JuuB.UWTy2ahCVOcH7THCXUFzG0UtcM1q",
+      "role": "donor",
+      "walletAddress": "",
+      "updatedAt": "2026-09-22T05:38:49.563Z",
+      "createdAt": "2026-09-22T05:38:49.564Z"
+    }
+  },
+  "donations": {
+    "d8j6jotvzcw": {
+      "donorName": "Anand Sharma",
+      "email": "anand.sharma@example.com",
+      "walletAddress": "0x1234567890abcdef1234567890abcdef12345678",
+      "amount": 0.25,
+      "currency": "ETH",
+      "purpose": "Shri Ram Mandir Development",
+      "transactionHash": "0x8f3c47e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9",
+      "paymentMode": "metamask",
+      "status": "confirmed",
+      "receiptNumber": "BT-2026-E09797E0",
+      "updatedAt": "2026-09-11T18:16:07.216Z",
+      "createdAt": "2026-09-11T18:16:07.216Z"
+    },
+    "10pjfxsim0id": {
+      "donorName": "Priya Patel",
+      "email": "priya.p@example.com",
+      "walletAddress": "",
+      "amount": 5001,
+      "currency": "INR",
+      "purpose": "Annakshetra & Food Service",
+      "transactionHash": "",
+      "paymentMode": "upi",
+      "status": "confirmed",
+      "receiptNumber": "BT-2026-01F19641",
+      "updatedAt": "2026-09-11T18:16:07.218Z",
+      "createdAt": "2026-09-11T18:16:07.218Z"
+    },
+    "u4hqjnbmgr": {
+      "donorName": "Rajesh Kumar",
+      "email": "rajesh.k@example.com",
+      "walletAddress": "0x9876543210fedcba9876543210fedcba98765432",
+      "amount": 0.5,
+      "currency": "ETH",
+      "purpose": "Infrastructure & Security",
+      "transactionHash": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "paymentMode": "metamask",
+      "status": "confirmed",
+      "receiptNumber": "BT-2026-4D3F8DF7",
+      "updatedAt": "2026-09-11T18:16:07.219Z",
+      "createdAt": "2026-09-11T18:16:07.219Z"
+    },
+    "l9jnifwark": {
+      "donorName": "ANIRUDDHA KULE",
+      "email": "202301034.aniruddhasml@student.xavier.ac.in",
+      "walletAddress": "0xcb1d95c1962513a59811804a1db8559263050ec7",
+      "amount": 0.01,
+      "currency": "ETH",
+      "purpose": "Shri Ram Mandir Main Development",
+      "transactionHash": "0x25c653eefd7adb03aa5784ddbbde77f0a488f047c326b23b159c6be4f9cd35e4",
+      "paymentMode": "metamask",
+      "status": "confirmed",
+      "receiptNumber": "BT-2026-239728CB",
+      "updatedAt": "2026-09-22T05:41:13.112Z",
+      "createdAt": "2026-09-22T05:41:13.112Z"
+    }
+  },
+  "expenses": {
+    "n8isnq0lu3i": {
+      "title": "Sandstone Carving & Pillar Engineering",
+      "category": "Temple Construction",
+      "amount": 450000,
+      "description": "Rajasthan pink sandstone carving, foundation reinforcement, and arch craftsmanship.",
+      "vendor": "Ayodhya Heritage Craftsmen Pvt Ltd",
+      "proofUrl": "",
+      "blockchainTxHash": "0x4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5",
+      "riskScore": 10,
+      "status": "approved",
+      "updatedAt": "2026-09-11T18:16:07.219Z",
+      "createdAt": "2026-09-11T18:16:07.219Z"
+    },
+    "r84stthbvq": {
+      "title": "Daily Annakshetra Meal Distribution (10,000 Pilgrims)",
+      "category": "Food & Prasadam",
+      "amount": 180000,
+      "description": "Sattvik bhojan ingredients, stainless steel kitchenware, and distribution logistics.",
+      "vendor": "Shri Ram Kitchen Trust",
+      "proofUrl": "",
+      "blockchainTxHash": "0x7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8",
+      "riskScore": 5,
+      "status": "approved",
+      "updatedAt": "2026-09-11T18:16:07.221Z",
+      "createdAt": "2026-09-11T18:16:07.221Z"
+    },
+    "2s6xy4o9r9g": {
+      "title": "Pilgrim Medical Center & Emergency First Aid",
+      "category": "Healthcare & Welfare",
+      "amount": 95000,
+      "description": "24/7 medical response center, ambulances, oxygen supply, and paramedic team.",
+      "vendor": "Sanjeevani HealthCare Ayodhya",
+      "proofUrl": "",
+      "blockchainTxHash": "0x3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4",
+      "riskScore": 12,
+      "status": "approved",
+      "updatedAt": "2026-09-11T18:16:07.222Z",
+      "createdAt": "2026-09-11T18:16:07.222Z"
+    },
+    "slybqck0y2n": {
+      "title": "AI Security Surveillance & Crowd Management",
+      "category": "Security & Infrastructure",
+      "amount": 120000,
+      "description": "CCTV network installation, smart crowd flow sensors, and emergency sirens.",
+      "vendor": "SecureTrust Systems Ltd",
+      "proofUrl": "",
+      "blockchainTxHash": "0x9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
+      "riskScore": 15,
+      "status": "approved",
+      "updatedAt": "2026-09-11T18:16:07.223Z",
+      "createdAt": "2026-09-11T18:16:07.223Z"
+    }
+  },
+  "campaigns": {},
+  "receipts": {
+    "nb60mujusvj": {
+      "receiptNumber": "BT-2026-239728CB",
+      "donation": "l9jnifwark",
+      "updatedAt": "2026-09-22T05:41:13.114Z",
+      "createdAt": "2026-09-22T05:41:13.114Z"
+    }
+  }
+}

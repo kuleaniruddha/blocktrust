@@ -1,0 +1,14 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "BlockTrust API", "version": "1.0.0" },
+  "servers": [{ "url": "http://localhost:5000/api" }],
+  "paths": {
+    "/auth/register": { "post": { "summary": "Register user", "responses": { "201": { "description": "Created" } } } },
+    "/auth/login": { "post": { "summary": "Login user", "responses": { "200": { "description": "Authenticated" } } } },
+    "/payment-intent": { "post": { "summary": "Create UPI QR payment intent", "responses": { "200": { "description": "Payment intent" } } } },
+    "/donate": { "post": { "summary": "Record donation", "responses": { "201": { "description": "Donation recorded" } } } },
+    "/donations": { "get": { "summary": "List donations", "responses": { "200": { "description": "Donation list" } } } },
+    "/expenses": { "get": { "summary": "List expenses", "responses": { "200": { "description": "Expense list" } } } },
+    "/dashboard": { "get": { "summary": "Dashboard metrics", "responses": { "200": { "description": "Metrics" } } } }
+  }
+}

@@ -1,0 +1,6 @@
+amount,category_code,vendor_history_days,is_approved,label
+2500,1,365,1,0
+12000,2,90,1,0
+85000,1,10,0,1
+5000,4,730,1,0
+150000,8,2,0,1

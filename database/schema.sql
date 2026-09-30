@@ -1,0 +1,30 @@
+CREATE TABLE users (
+  id VARCHAR(36) PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(180) UNIQUE NOT NULL,
+  role VARCHAR(30) NOT NULL,
+  wallet_address VARCHAR(120),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE donations (
+  id VARCHAR(36) PRIMARY KEY,
+  donor_id VARCHAR(36),
+  amount DECIMAL(18, 8) NOT NULL,
+  currency VARCHAR(10) NOT NULL,
+  transaction_hash VARCHAR(120),
+  receipt_number VARCHAR(40) UNIQUE,
+  status VARCHAR(30) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE expenses (
+  id VARCHAR(36) PRIMARY KEY,
+  title VARCHAR(180) NOT NULL,
+  category VARCHAR(80) NOT NULL,
+  amount DECIMAL(18, 2) NOT NULL,
+  proof_url TEXT,
+  risk_score DECIMAL(5, 2),
+  status VARCHAR(30) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

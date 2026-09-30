@@ -1,0 +1,19 @@
+{
+  "name": "blocktrust",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blockchain-based donation transparency system with frontend, backend, smart contracts, AI analytics, and deployment docs.",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "backend": "npm run dev --prefix backend",
+    "frontend": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "seed": "node database/seed.js",
+    "blockchain:test": "npm test --prefix blockchain",
+    "ai:train": "python ai/anomaly_detection/train.py",
+    "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend && npm install --prefix blockchain"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

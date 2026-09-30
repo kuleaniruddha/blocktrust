@@ -1,0 +1,8 @@
+{
+  "info": { "name": "BlockTrust", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "item": [
+    { "name": "Health", "request": { "method": "GET", "url": "http://localhost:5000/health" } },
+    { "name": "Dashboard", "request": { "method": "GET", "url": "http://localhost:5000/api/dashboard" } },
+    { "name": "Create UPI Intent", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"amount\":501}" }, "url": "http://localhost:5000/api/payment-intent" } }
+  ]
+}
